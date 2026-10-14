@@ -1,0 +1,72 @@
+questão 3 - tarefas adicionais
+
+letra a)
+desenhe a árvore após cada operação de remoção:
+
+1. após a remoção do nó 20:
+           50
+         /    \
+       30      70
+      /  \    /  \
+    10   40  60  80
+      \  /    \  /
+      25 35   65 75
+
+2. após a remoção do nó 70:
+           50
+         /    \
+       30      65
+      /  \    /  \
+    10   40  60  80
+      \  /       /
+      25 35     75
+
+3. após a remoção do nó 50:
+           40
+         /    \
+       30      65
+      /  \    /  \
+    10   35  60  80
+      \          /
+      25        75
+
+(árvore final após inserir 55 e 15):
+             40
+          /      \
+        30        65
+       /  \      /  \
+     10   35    60   80
+       \       /    /
+        25    55   75
+       /
+      15
+
+
+letra b)
+informe o percurso em ordem da árvore ao final das operações:
+10, 15, 25, 30, 35, 40, 55, 60, 65, 75, 80
+
+
+letra c)
+determine a altura da árvore final:
+altura = 4
+(considerando a raiz com altura 0, o caminho mais longo até uma folha possui 4 arestas: 40 -> 30 -> 10 -> 25 -> 15).
+
+
+letra d)
+determine o número de folhas:
+4 folhas (são os nós 15, 35, 55 e 75).
+
+
+letra e)
+determine o 5º menor elemento utilizando abb_kesimo_menor():
+o 5º menor elemento é 35.
+
+
+letra f)
+explique detalhadamente como sua implementação de abb_remove() trata a remoção do nó 70 e posteriormente do nó 50, destacando o uso do predecessor:
+ambos os casos tratam a remoção de nós com dois filhos (caso 3), onde o nó a ser removido tem seu valor substituído pelo predecessor (o maior valor da sua subárvore esquerda, obtido pela função maior_elemento(raiz->esq)), seguido da remoção recursiva desse predecessor:
+
+- remoção do nó 70: o predecessor de 70 é o nó 65 (maior elemento da subárvore esquerda com raiz 60). o valor 65 é copiado para a posição do 70 e, em seguida, a função remove recursivamente o nó 65 original. como o nó 65 original não tinha filhos (era folha), ele é simplesmente liberado da memória (caso 1 de remoção).
+
+- remoção do nó 50: o predecessor de 50 é o nó 40 (maior elemento da subárvore esquerda com raiz 30). o valor 40 é copiado para a raiz (onde estava o 50) e, em seguida, a função remove recursivamente o nó 40 original. diferente do nó 65, o nó 40 original possuía um filho à sua esquerda (o nó 35). logo, ao remover o nó 40, a função entra no caso 2 (nó com apenas um filho), promovendo o nó 35 para assumir diretamente a ligação como filho direito do nó 30.
